@@ -49,11 +49,11 @@ func GetSQLConfig(server string, sType SType) (*goToolMSSql.MSSqlConfig, error) 
 	switch sType {
 	case ZB:
 		appType = "30"
-		clientType = "3001"
+		clientType = "1"
 		port = 7050
 	case MD:
 		appType = "31"
-		clientType = "3101"
+		clientType = "3"
 		port = 7051
 	default:
 		return nil, errors.New(fmt.Sprintf("unexpected type: %s", string(sType)))
