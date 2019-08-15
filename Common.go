@@ -89,7 +89,7 @@ func GetSQLConfig(server string, sType SType) (*goToolMSSql.MSSqlConfig, error) 
 		errMsg := fmt.Sprintf("socket return err msg: %s", connectInfoList[2])
 		return nil, errors.New(errMsg)
 	}
-	if len(connectInfoList) < 8 {
+	if len(connectInfoList) < 5 {
 		errMsg := "socket return msg split without sql config"
 		return nil, errors.New(errMsg)
 	}
@@ -203,6 +203,15 @@ func GetZlCompany(dbConfig *goToolMSSql2000.MSSqlConfig) (*ZlCompany, error) {
 		if err != nil {
 			return nil, err
 		}
+		rList = append(rList, &ZlCompany{
+			CoId:        coId,
+			CoAb:        coAb,
+			CoCode:      coCode,
+			CoType:      coType,
+			CoUserAb:    coUserAb,
+			CoUserCode:  coUserCode,
+			CoAccCrDate: coAccCrDate,
+		})
 	}
 	if rows.Err() != nil {
 		err = rows.Err()
@@ -231,6 +240,12 @@ func GetZlVersion(dbConfig *goToolMSSql2000.MSSqlConfig) ([]*ZlVersion, error) {
 		if err != nil {
 			return nil, err
 		}
+		rList = append(rList, &ZlVersion{
+			ObjectName:    objectName,
+			ObjectType:    objectType,
+			ObjectVersion: objectVersion,
+			ObjectDate:    objectDate,
+		})
 	}
 	if rows.Err() != nil {
 		err = rows.Err()
